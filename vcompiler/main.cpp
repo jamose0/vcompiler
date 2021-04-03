@@ -6,7 +6,7 @@
 
 int main()
 {
-    Scanner s{"   var x = 7 + 3;"};
+    Scanner s{"   #djfelsj\n var x = 7 + 3;"};
     Token t{s.nextToken()};
     std::cout << t << '\n';
     return 0;

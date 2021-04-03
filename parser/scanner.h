@@ -16,6 +16,8 @@ private:
     /* Moves m_ip to the first non-whitespace character */
     void skipWS();
 
+    void skipToEndl();
+
 public:
     Scanner(std::string_view src);
 

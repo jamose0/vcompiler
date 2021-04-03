@@ -21,11 +21,23 @@ void Scanner::skipWS()
     }
 }
 
+void Scanner::skipToEndl()
+{
+    while (*(m_ip++) != '\n')
+    {
+    }
+}
+
 Token Scanner::nextToken()
 {
     std::cout << "getting next token!\n";
 
     skipWS();
+    if (*m_ip == '#') {
+        skipToEndl();
+    }
+    skipWS();
+
     std::cout << *m_ip << '\n';
     return Token{TokenType::STRING_L, "next token"};
 }
