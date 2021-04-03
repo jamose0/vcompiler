@@ -18,6 +18,10 @@ private:
 
     void skipToEndl();
 
+    bool isEligibleForIdent();
+
+    bool matchKW(std::string_view kw, char* sp);
+
 public:
     Scanner(std::string_view src);
 
