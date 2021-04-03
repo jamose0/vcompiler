@@ -45,4 +45,7 @@ public:
     friend std::ostream& operator<<(std::ostream &out, const Token &t);
 };
 
+#define MAKE_TOK(type, sp, len) \
+    Token{TokenType::type, std::string{sp, len}}
+
 #endif

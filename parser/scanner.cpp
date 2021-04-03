@@ -64,6 +64,10 @@ Token Scanner::nextToken()
             std::cout << "matched i\n";
             if (matchKW("int", sp)) {
                 std::cout << "matched int\n";
+                return MAKE_TOK(INT, sp, 3);
+            } else if (matchKW("if", sp)) {
+                std::cout << "matched if\n";
+                return MAKE_TOK(IF, sp, 2);
             }
             break;
     }

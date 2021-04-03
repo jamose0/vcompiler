@@ -6,7 +6,7 @@
 
 int main()
 {
-    Scanner s{"   #djfelsj\n intx x = 7 + 3;"};
+    Scanner s{"   #djfelsj\n if x = 7 + 3;"};
     Token t{s.nextToken()};
     std::cout << t << '\n';
     return 0;
