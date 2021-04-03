@@ -1,6 +1,8 @@
 #ifndef SCANNER_H
 #define SCANNER_H
 
+#include "token.h"
+
 #include <string_view>
 
 class Scanner {
@@ -10,6 +12,8 @@ private:
 
 public:
     Scanner(std::string_view src);
+
+    Token nextToken();
 };
 
 #endif
