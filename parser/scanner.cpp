@@ -9,8 +9,23 @@ Scanner::Scanner(std::string_view src)
     m_ip = const_cast<char*>(m_src.data());
 }
 
+bool Scanner::isWS()
+{
+    return (*m_ip == ' ' || *m_ip == '\t' || *m_ip == '\n');
+}
+
+void Scanner::skipWS()
+{
+    while (isWS()) {
+        ++m_ip;
+    }
+}
+
 Token Scanner::nextToken()
 {
     std::cout << "getting next token!\n";
+
+    skipWS();
+    std::cout << *m_ip << '\n';
     return Token{TokenType::STRING_L, "next token"};
 }

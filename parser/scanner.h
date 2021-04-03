@@ -10,6 +10,12 @@ private:
     std::string_view m_src;
     char* m_ip;
 
+    /* Returns true if m_ip points to ' ', '\t', or '\n' */
+    bool isWS();
+
+    /* Moves m_ip to the first non-whitespace character */
+    void skipWS();
+
 public:
     Scanner(std::string_view src);
 
