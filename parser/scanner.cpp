@@ -110,6 +110,10 @@ Token Scanner::nextToken()
                 return MAKE_TOK(VAR, sp, 3);
             }
             break;
+        case '*': return MAKE_TOK(STAR, sp, 1);
+        case '/': return MAKE_TOK(SLASH, sp, 1);
+        case '-': return MAKE_TOK(MINUS, sp, 1);
+        case '+': return MAKE_TOK(PLUS, sp, 1);
     }
 
     m_ip = sp;
