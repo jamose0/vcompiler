@@ -70,6 +70,20 @@ Token Scanner::nextToken()
                 return MAKE_TOK(IF, sp, 2);
             }
             break;
+        case 'f':
+            std::cout << "matched f\n";
+            if (matchKW("float", sp)) {
+                std::cout << "matched float\n";
+                return MAKE_TOK(FLOAT, sp, 5);
+            }
+            break;
+        case 'v':
+            std::cout << "matched v\n";
+            if (matchKW("var", sp)) {
+                std::cout << "matched var\n";
+                return MAKE_TOK(VAR, sp, 3);
+            }
+            break;
     }
 
     std::cout << *m_ip << '\n';
