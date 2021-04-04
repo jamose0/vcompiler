@@ -38,7 +38,7 @@ bool Scanner::isEligibleForIdent()
 bool Scanner::matchKW(std::string_view kw, char* sp)
 {
     if (strncmp(kw.data(), sp, kw.length()) == 0) {
-        m_ip += kw.length();
+        m_ip += kw.length() - 1;
 
         return !isEligibleForIdent();
     }
@@ -76,6 +76,10 @@ Token Scanner::nextToken()
 {
     std::cout << "getting next token!\n";
 
+    if (*m_ip == '\0' || *m_ip == EOF) {
+        return Token{TokenType::END, "end"};
+    }
+
     skipWS();
     if (*m_ip == '#') {
         skipToEndl();
@@ -83,7 +87,7 @@ Token Scanner::nextToken()
     skipWS();
 
     // sp is a pointer to the first character of the next token
-    char* sp = m_ip;
+    char* sp = (m_ip++);
 
     switch (*sp) {
         case 'i':

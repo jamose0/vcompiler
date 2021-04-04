@@ -32,6 +32,9 @@ enum class TokenType {
 
     /* Identifier */
     IDENT,
+
+    /* end */
+    END,
     // more to come!
 };
 
@@ -45,6 +48,10 @@ public:
         : m_type{type}, m_lexeme{lexeme}
     {
     }
+
+    TokenType getType() const;
+
+    std::string_view getLexeme() const;
 
     friend std::ostream& operator<<(std::ostream &out, const Token &t);
 };

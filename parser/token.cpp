@@ -2,6 +2,16 @@
 
 #include <iostream>
 
+TokenType Token::getType() const
+{
+    return m_type;
+}
+
+std::string_view Token::getLexeme() const
+{
+    return m_lexeme;
+}
+
 std::ostream& operator<<(std::ostream &out, const Token &t)
 {
     out << "TOKEN: TYPE -> ";
@@ -59,6 +69,9 @@ std::ostream& operator<<(std::ostream &out, const Token &t)
             break;
         case TokenType::IDENT:
             out << "IDENT";
+            break;
+        case TokenType::END:
+            out << "END";
             break;
         default:
             out << "No match";

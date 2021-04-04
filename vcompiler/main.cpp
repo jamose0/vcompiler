@@ -6,8 +6,11 @@
 
 int main()
 {
-    Scanner s{"   #djfelsj\n +{ x = 7 + 3;"};
+    Scanner s{" #program\n 3 + 2 -9 * 6 int hey 7"};
     Token t{s.nextToken()};
-    std::cout << t << '\n';
+    while (t.getType() != TokenType::END) {
+        std::cout << t << '\n';
+        t = s.nextToken();
+    }
     return 0;
 }
