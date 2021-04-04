@@ -29,6 +29,9 @@ enum class TokenType {
     INT,
     FLOAT,
     VAR,
+
+    /* Identifier */
+    IDENT,
     // more to come!
 };
 

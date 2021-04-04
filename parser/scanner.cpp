@@ -63,6 +63,15 @@ Token Scanner::getNumber(char* sp)
     return MAKE_TOK(INTEGER_L, sp, static_cast<size_t>(m_ip - sp));
 }
 
+Token Scanner::getIdent(char* sp)
+{
+    while (isEligibleForIdent()) {
+        ++m_ip;
+    }
+
+    return MAKE_TOK(IDENT, sp, static_cast<size_t>(m_ip - sp));
+}
+
 Token Scanner::nextToken()
 {
     std::cout << "getting next token!\n";
@@ -103,8 +112,12 @@ Token Scanner::nextToken()
             break;
     }
 
+    m_ip = sp;
+
     if (isdigit(*m_ip)) {
         return getNumber(sp);
+    } else if (isEligibleForIdent()) {
+        return getIdent(sp);
     }
 
     std::cout << *m_ip << '\n';

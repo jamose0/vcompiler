@@ -57,6 +57,9 @@ std::ostream& operator<<(std::ostream &out, const Token &t)
         case TokenType::VAR:
             out << "VAR";
             break;
+        case TokenType::IDENT:
+            out << "IDENT";
+            break;
         default:
             out << "No match";
             break;
