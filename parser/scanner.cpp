@@ -46,6 +46,23 @@ bool Scanner::matchKW(std::string_view kw, char* sp)
     return false;
 }
 
+Token Scanner::getNumber(char* sp)
+{
+    while (isdigit(*m_ip)) {
+        ++m_ip;
+
+        if (*m_ip == '.') {
+            ++m_ip;
+            while (isdigit(*m_ip)) {
+                ++m_ip;
+            }
+
+            return MAKE_TOK(FLOAT_L, sp, static_cast<size_t>(m_ip - sp));
+        }
+    }
+    return MAKE_TOK(INTEGER_L, sp, static_cast<size_t>(m_ip - sp));
+}
+
 Token Scanner::nextToken()
 {
     std::cout << "getting next token!\n";
@@ -84,6 +101,10 @@ Token Scanner::nextToken()
                 return MAKE_TOK(VAR, sp, 3);
             }
             break;
+    }
+
+    if (isdigit(*m_ip)) {
+        return getNumber(sp);
     }
 
     std::cout << *m_ip << '\n';

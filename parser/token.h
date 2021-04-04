@@ -1,6 +1,7 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 
+#include <string>
 #include <string_view>
 
 enum class TokenType {
@@ -34,7 +35,7 @@ enum class TokenType {
 class Token {
 private:
     TokenType m_type;
-    std::string_view m_lexeme;
+    std::string m_lexeme;
 
 public:
     Token(TokenType type, std::string_view lexeme)

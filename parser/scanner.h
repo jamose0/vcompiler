@@ -22,6 +22,8 @@ private:
 
     bool matchKW(std::string_view kw, char* sp);
 
+    Token getNumber(char* sp);
+
 public:
     Scanner(std::string_view src);
 
