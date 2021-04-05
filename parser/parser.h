@@ -11,10 +11,24 @@ private:
     Scanner m_scanner;
     Token m_current_tok;
 
+    void advanceToken();
+
+    bool accept(const TokenType &t);
+
+    void expect(const TokenType &t);
+
+    void expr();
+
+    void stmt();
+
+    void decl();
+
+    void block();
+
 public:
     Parser(std::string_view m_source);
 
-    void Parse();
+    void parse();
 };
 
 #endif

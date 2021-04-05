@@ -12,5 +12,7 @@ int main()
         std::cout << t << '\n';
         t = s.nextToken();
     }
+    Parser p{" var x = 7;"};
+    p.parse();
     return 0;
 }
