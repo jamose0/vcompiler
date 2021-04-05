@@ -40,6 +40,12 @@ std::ostream& operator<<(std::ostream &out, const Token &t)
         case TokenType::LPAREN:
             out << "LPAREN";
             break;
+        case TokenType::RBRACKET:
+            out << "RBRACKET";
+            break;
+        case TokenType::LBRACKET:
+            out << "LBRACKET";
+            break;
         case TokenType::PLUS:
             out << "PLUS";
             break;

@@ -122,6 +122,8 @@ Token Scanner::nextToken()
         case '{': return MAKE_TOK(LBRACE, sp, 1);
         case ')': return MAKE_TOK(RPAREN, sp, 1);
         case '(': return MAKE_TOK(LPAREN, sp, 1);
+        case ']': return MAKE_TOK(RBRACKET, sp, 1);
+        case '[': return MAKE_TOK(LBRACKET, sp, 1);
         /* --- Operators --- */
         // single character operators
         case '*': return MAKE_TOK(STAR, sp, 1);

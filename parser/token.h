@@ -16,6 +16,8 @@ enum class TokenType {
     LBRACE,
     RPAREN,
     LPAREN,
+    RBRACKET,
+    LBRACKET,
 
     /* Operators */
     PLUS,
