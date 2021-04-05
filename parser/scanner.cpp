@@ -116,6 +116,12 @@ Token Scanner::nextToken()
             }
             break;
         /* --- Punctuation --- */
+        // Punctuation is easy because each symbol is one character
+        case ';': return MAKE_TOK(SEMICOLON, sp, 1);
+        case '}': return MAKE_TOK(RBRACE, sp, 1);
+        case '{': return MAKE_TOK(LBRACE, sp, 1);
+        case ')': return MAKE_TOK(RPAREN, sp, 1);
+        case '(': return MAKE_TOK(LPAREN, sp, 1);
         /* --- Operators --- */
         // single character operators
         case '*': return MAKE_TOK(STAR, sp, 1);
