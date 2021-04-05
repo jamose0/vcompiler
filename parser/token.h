@@ -24,6 +24,12 @@ enum class TokenType {
     SLASH,
     EQ,
     EQ_EQ,
+    GR,
+    GR_EQ,
+    LE,
+    LE_EQ,
+    BANG,
+    BANG_EQ,
 
     /* Keywords */
     IF,

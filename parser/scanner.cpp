@@ -90,6 +90,7 @@ Token Scanner::nextToken()
     char* sp = (m_ip++);
 
     switch (*sp) {
+        /* --- Keywords --- */
         case 'i':
             std::cout << "matched i\n";
             if (matchKW("int", sp)) {
@@ -114,6 +115,7 @@ Token Scanner::nextToken()
                 return MAKE_TOK(VAR, sp, 3);
             }
             break;
+        /* --- Punctuation --- */
         /* --- Operators --- */
         // single character operators
         case '*': return MAKE_TOK(STAR, sp, 1);
@@ -123,11 +125,12 @@ Token Scanner::nextToken()
         // Operators that may or may not be two character operators
         case '=': {
             if (*(m_ip++) == '=')  {
-                std::cout << "two char\n";
                 return MAKE_TOK(EQ_EQ, sp, 2);
             }
             return MAKE_TOK(EQ, sp, 1);
         }
+
+
     }
 
     m_ip = sp;
