@@ -13,6 +13,8 @@ private:
 
 public:
     Parser(std::string_view m_source);
+
+    void Parse();
 };
 
 #endif
