@@ -6,7 +6,7 @@
 
 int main()
 {
-    Scanner s{" #program\n 3 == 2 = -9 * 6 int hey 7"};
+    Scanner s{" #program\n 3 ==f 2 =8 -9 * 6 <=d >= != ! < >7"};
     Token t{s.nextToken()};
     while (t.getType() != TokenType::END) {
         std::cout << t << '\n';

@@ -124,12 +124,35 @@ Token Scanner::nextToken()
         case '+': return MAKE_TOK(PLUS, sp, 1);
         // Operators that may or may not be two character operators
         case '=': {
-            if (*(m_ip++) == '=')  {
+            // We can't do *(m_ip++), because that would move the pointer
+            // forwards regardless of whether or not *m_ip matches '='
+            if (*m_ip == '=') {
+                ++m_ip;
                 return MAKE_TOK(EQ_EQ, sp, 2);
             }
             return MAKE_TOK(EQ, sp, 1);
         }
-
+        case '>': {
+            if (*m_ip == '=') {
+                ++m_ip;
+                return MAKE_TOK(GR_EQ, sp, 2);
+            }
+            return MAKE_TOK(GR, sp, 1);
+        }
+        case '<': {
+            if (*m_ip == '=') {
+                ++m_ip;
+                return MAKE_TOK(LE_EQ, sp, 2);
+            }
+            return MAKE_TOK(LE, sp, 1);
+        }
+        case '!': {
+            if (*m_ip == '=') {
+                ++m_ip;
+                return MAKE_TOK(BANG_EQ, sp, 2);
+            }
+            return MAKE_TOK(BANG, sp, 1);
+        }
 
     }
 
