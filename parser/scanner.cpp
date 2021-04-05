@@ -114,10 +114,20 @@ Token Scanner::nextToken()
                 return MAKE_TOK(VAR, sp, 3);
             }
             break;
+        /* --- Operators --- */
+        // single character operators
         case '*': return MAKE_TOK(STAR, sp, 1);
         case '/': return MAKE_TOK(SLASH, sp, 1);
         case '-': return MAKE_TOK(MINUS, sp, 1);
         case '+': return MAKE_TOK(PLUS, sp, 1);
+        // Operators that may or may not be two character operators
+        case '=': {
+            if (*(m_ip++) == '=')  {
+                std::cout << "two char\n";
+                return MAKE_TOK(EQ_EQ, sp, 2);
+            }
+            return MAKE_TOK(EQ, sp, 1);
+        }
     }
 
     m_ip = sp;

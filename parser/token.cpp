@@ -55,6 +55,9 @@ std::ostream& operator<<(std::ostream &out, const Token &t)
         case TokenType::EQ:
             out << "EQ";
             break;
+        case TokenType::EQ_EQ:
+            out << "EQ_EQ";
+            break;
         case TokenType::IF:
             out << "IF";
             break;

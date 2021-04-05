@@ -23,6 +23,7 @@ enum class TokenType {
     STAR,
     SLASH,
     EQ,
+    EQ_EQ,
 
     /* Keywords */
     IF,
