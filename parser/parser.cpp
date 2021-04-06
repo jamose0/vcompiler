@@ -2,6 +2,8 @@
 #include "parser.h"
 #include "parseerror.h"
 
+#include "ast.h"
+
 #include <string_view>
 #include <iostream>
 
@@ -131,5 +133,6 @@ void Parser::block()
 
 void Parser::parse()
 {
+    Ast a{};
     block();
 }
