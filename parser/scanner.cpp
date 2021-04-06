@@ -1,5 +1,6 @@
 #include "scanner.h"
 #include "token.h"
+#include "parseerror.h"
 
 #include <iostream>
 
@@ -25,8 +26,7 @@ void Scanner::skipWS()
 
 void Scanner::skipToEndl()
 {
-    while (*(m_ip++) != '\n')
-    {
+    while (*(m_ip++) != '\n') {
     }
 }
 
@@ -74,7 +74,7 @@ Token Scanner::getIdent(char* sp)
 
 Token Scanner::nextToken()
 {
-    std::cout << "getting next token!\n";
+    //std::cout << "getting next token!\n";
 
     if (*m_ip == '\0' || *m_ip == EOF) {
         return Token{TokenType::END, "end"};
@@ -92,26 +92,26 @@ Token Scanner::nextToken()
     switch (*sp) {
         /* --- Keywords --- */
         case 'i':
-            std::cout << "matched i\n";
+            //std::cout << "matched i\n";
             if (matchKW("int", sp)) {
-                std::cout << "matched int\n";
+                //std::cout << "matched int\n";
                 return MAKE_TOK(INT, sp, 3);
             } else if (matchKW("if", sp)) {
-                std::cout << "matched if\n";
+                //std::cout << "matched if\n";
                 return MAKE_TOK(IF, sp, 2);
             }
             break;
         case 'f':
-            std::cout << "matched f\n";
+            //std::cout << "matched f\n";
             if (matchKW("float", sp)) {
-                std::cout << "matched float\n";
+                //std::cout << "matched float\n";
                 return MAKE_TOK(FLOAT, sp, 5);
             }
             break;
         case 'v':
-            std::cout << "matched v\n";
+            //std::cout << "matched v\n";
             if (matchKW("var", sp)) {
-                std::cout << "matched var\n";
+                //std::cout << "matched var\n";
                 return MAKE_TOK(VAR, sp, 3);
             }
             break;
@@ -173,5 +173,6 @@ Token Scanner::nextToken()
     }
 
     std::cout << *m_ip << '\n';
-    return Token{TokenType::STRING_L, "next token"};
+    throw ParseError{"Unexpected symbol!\n"};
+    //return Token{TokenType::STRING_L, "next token"};
 }

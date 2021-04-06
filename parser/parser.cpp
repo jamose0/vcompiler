@@ -27,9 +27,64 @@ void Parser::advanceToken()
     m_current_tok = m_scanner.nextToken();
 }
 
+void Parser::factor()
+{
+    std::cout << "tok at factor -> " << m_current_tok << '\n';
+    if (accept(TokenType::MINUS)) {
+        advanceToken();
+        factor();
+    } else if (accept(TokenType::LPAREN)) {
+        advanceToken();
+        expr();
+        expect(TokenType::RPAREN);
+        advanceToken();
+    } else if (accept(TokenType::IDENT)) {
+        std::cout << "found identifier!\n";
+        advanceToken();
+    } else if (accept(TokenType::INTEGER_L)) {
+        std::cout << "found an integer literal!\n";
+        advanceToken();
+    } else {
+        throw ParseError{"couldn't match at factor"};
+    }
+}
+
+void Parser::termP()
+{
+    if (accept(TokenType::STAR)) {
+        advanceToken();
+        factor();
+        termP();
+    } else if (accept(TokenType::SLASH)) {
+        advanceToken();
+        factor();
+        termP();
+    }
+}
+
+void Parser::exprP()
+{
+    if (accept(TokenType::PLUS)) {
+        advanceToken();
+        term();
+        exprP();
+    } else if (accept(TokenType::PLUS)) {
+        advanceToken();
+        term();
+        exprP();
+    }
+
+}
+
+void Parser::term()
+{
+    factor();
+    termP();
+}
+
 void Parser::expr()
 {
-    advanceToken();
+    term();
 }
 
 void Parser::stmt()

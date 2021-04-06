@@ -17,6 +17,14 @@ private:
 
     void expect(const TokenType &t);
 
+    void factor();
+
+    void termP();
+
+    void exprP();
+
+    void term();
+
     void expr();
 
     void stmt();
