@@ -1,3 +1,4 @@
+/* Definitions for Parser class */
 #include "parser.h"
 #include "parseerror.h"
 
@@ -18,6 +19,8 @@ void Parser::expect(const TokenType &t)
 {
     std::cout << "current -> " << m_current_tok << '\n';
     if (!accept(t)) {
+        // Throw a parse error if the next token is not what we expect it
+        // to be.
         throw ParseError{"Failed expect"};
     }
 }
