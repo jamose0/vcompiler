@@ -85,6 +85,7 @@ void Parser::term()
 void Parser::expr()
 {
     term();
+    exprP();
 }
 
 void Parser::stmt()
