@@ -42,13 +42,20 @@ static bool accept(const Parser &p, const TokenType &t)
     return t == p.getCurrentTok().getType();
 }
 
-void Parser::expect(const TokenType &t)
+static void expect(const Parser &p, const TokenType &t)
+{
+    std::cout << "current -> " << p.getCurrentTok() << '\n';
+    if (!accept(p, t))
+        throw ParseError{"failed expect!"};
+}
+
+/*void Parser::expect(const TokenType &t)
 {
     std::cout << "current -> " << m_current_tok << '\n';
     if (!accept(*this, t)) {
         throw ParseError{"failed expect!"};
     }
-}
+}*/
 
 void Parser::advanceToken()
 {
@@ -64,7 +71,7 @@ void Parser::factor()
     } else if (accept(*this, TokenType::LPAREN)) {
         advanceToken();
         expr();
-        expect(TokenType::RPAREN);
+        expect(*this, TokenType::RPAREN);
         advanceToken();
     } else if (accept(*this, TokenType::IDENT)) {
         std::cout << "found identifier!\n";
@@ -127,13 +134,13 @@ void Parser::stmt()
     } else if (accept(*this, TokenType::VAR)) {
         std::cout << "Found var\n";
         advanceToken();
-        expect(TokenType::IDENT);
+        expect(*this, TokenType::IDENT);
         advanceToken();
-        expect(TokenType::EQ);
+        expect(*this, TokenType::EQ);
         std::cout << "calling expr\n";
         advanceToken();
         expr();
-        expect(TokenType::SEMICOLON);
+        expect(*this, TokenType::SEMICOLON);
         advanceToken();
     }
 }

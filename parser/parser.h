@@ -15,7 +15,7 @@ private:
 
     //bool accept(const TokenType &t);
 
-    void expect(const TokenType &t);
+    //void expect(const TokenType &t);
 
     void factor();
 
