@@ -12,7 +12,7 @@ int main()
         std::cout << t << '\n';
         t = s.nextToken();
     }
-    Parser p{" var x77 = (7+4 * 2 / 7);"};
+    Parser p{" var x77 = (7+4 * 2 / 7 - 4) - 4;"};
     p.parse();
     return 0;
 }
