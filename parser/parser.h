@@ -13,7 +13,7 @@ private:
 
     void advanceToken();
 
-    bool accept(const TokenType &t);
+    //bool accept(const TokenType &t);
 
     void expect(const TokenType &t);
 
@@ -37,6 +37,8 @@ public:
     Parser(std::string_view m_source);
 
     void parse();
+
+    const Token& getCurrentTok() const;
 };
 
 #endif

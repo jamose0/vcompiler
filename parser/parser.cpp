@@ -12,18 +12,41 @@ Parser::Parser(std::string_view m_source)
 {
 }
 
-bool Parser::accept(const TokenType &t)
+/*bool Parser::accept(const TokenType &t)
 {
     return t == m_current_tok.getType();
-}
+}*/
 
-void Parser::expect(const TokenType &t)
+/*void Parser::expect(const TokenType &t)
 {
     std::cout << "current -> " << m_current_tok << '\n';
     if (!accept(t)) {
         // Throw a parse error if the next token is not what we expect it
         // to be.
         throw ParseError{"Failed expect"};
+    }
+}*/
+
+/*static bool accept(const TokenType &t)
+{
+    return t == getCurrentTok().getType();
+}*/
+
+const Token& Parser::getCurrentTok() const
+{
+    return m_current_tok;
+}
+
+static bool accept(const Parser &p, const TokenType &t)
+{
+    return t == p.getCurrentTok().getType();
+}
+
+void Parser::expect(const TokenType &t)
+{
+    std::cout << "current -> " << m_current_tok << '\n';
+    if (!accept(*this, t)) {
+        throw ParseError{"failed expect!"};
     }
 }
 
@@ -35,18 +58,18 @@ void Parser::advanceToken()
 void Parser::factor()
 {
     std::cout << "tok at factor -> " << m_current_tok << '\n';
-    if (accept(TokenType::MINUS)) {
+    if (accept(*this, TokenType::MINUS)) {
         advanceToken();
         factor();
-    } else if (accept(TokenType::LPAREN)) {
+    } else if (accept(*this, TokenType::LPAREN)) {
         advanceToken();
         expr();
         expect(TokenType::RPAREN);
         advanceToken();
-    } else if (accept(TokenType::IDENT)) {
+    } else if (accept(*this, TokenType::IDENT)) {
         std::cout << "found identifier!\n";
         advanceToken();
-    } else if (accept(TokenType::INTEGER_L)) {
+    } else if (accept(*this, TokenType::INTEGER_L)) {
         std::cout << "found an integer literal!\n";
         advanceToken();
     } else {
@@ -56,11 +79,11 @@ void Parser::factor()
 
 void Parser::termP()
 {
-    if (accept(TokenType::STAR)) {
+    if (accept(*this, TokenType::STAR)) {
         advanceToken();
         factor();
         termP();
-    } else if (accept(TokenType::SLASH)) {
+    } else if (accept(*this, TokenType::SLASH)) {
         advanceToken();
         factor();
         termP();
@@ -69,11 +92,11 @@ void Parser::termP()
 
 void Parser::exprP()
 {
-    if (accept(TokenType::PLUS)) {
+    if (accept(*this, TokenType::PLUS)) {
         advanceToken();
         term();
         exprP();
-    } else if (accept(TokenType::PLUS)) {
+    } else if (accept(*this, TokenType::PLUS)) {
         advanceToken();
         term();
         exprP();
@@ -95,12 +118,14 @@ void Parser::expr()
 
 void Parser::stmt()
 {
-    if (accept(TokenType::MINUS) ||
-        accept(TokenType::LPAREN) ||
-        accept(TokenType::IDENT) ||
-        accept(TokenType::INTEGER_L)) {
+    std::cout << "token at stmt -> " << getCurrentTok() << '\n';
+    if (accept(*this, TokenType::MINUS) ||
+        accept(*this, TokenType::LPAREN) ||
+        accept(*this, TokenType::IDENT) ||
+        accept(*this, TokenType::INTEGER_L)) {
         expr();
-    } else if (accept(TokenType::VAR)) {
+    } else if (accept(*this, TokenType::VAR)) {
+        std::cout << "Found var\n";
         advanceToken();
         expect(TokenType::IDENT);
         advanceToken();
@@ -123,7 +148,7 @@ void Parser::block()
     decl();
     std::cout << "token at block -> " << m_current_tok << '\n';
 
-    if (accept(TokenType::END)) {
+    if (accept(*this, TokenType::END)) {
         std::cout << "we're at the end!\n";
         return;
     }
@@ -134,5 +159,6 @@ void Parser::block()
 void Parser::parse()
 {
     Ast a{};
+    std::cout << getCurrentTok() << '\n';
     block();
 }
